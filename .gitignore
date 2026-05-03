@@ -21,3 +21,6 @@ wp-content/backup*/
 
 # Release packages
 *.zip
+
+# Release packages
+*.zip
