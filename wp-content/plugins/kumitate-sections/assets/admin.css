@@ -1,0 +1,275 @@
+/**
+ * Kumitate Sections Admin CSS
+ */
+
+.kmt-admin-meta-wrap {
+    padding: 10px 0;
+}
+
+.kmt-admin-field {
+  margin-bottom: 20px;
+}
+
+/* テンプレート警告 */
+.kmt-template-warning {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffb900;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* 汎用アコーディオン */
+.kmt-accordion-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    padding: 10px 0;
+}
+
+.kmt-accordion-toggle:hover {
+    color: #2271b1;
+}
+
+.kmt-admin-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.kmt-admin-field textarea {
+  width: 100%;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  tab-size: 2;
+  background-color: #fcfcfc;
+  padding: 10px;
+}
+
+/* 一括取り込み欄 */
+.kmt-bulk-import-container {
+    margin: 20px 0;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.kmt-bulk-import-header {
+    padding: 12px 15px;
+    cursor: pointer;
+    background: #f6f7f7;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+}
+
+.kmt-bulk-import-header:hover {
+    background: #f0f0f1;
+}
+
+.kmt-bulk-import-header .dashicons {
+    margin-right: 8px;
+    transition: transform 0.2s;
+}
+
+.kmt-is-open .kmt-bulk-import-header {
+    border-bottom-color: #ccd0d4;
+}
+
+.kmt-is-open .kmt-bulk-import-header .dashicons {
+    transform: rotate(90deg);
+}
+
+.kmt-bulk-import-body {
+    padding: 15px;
+}
+
+.kmt-bulk-html-input {
+    width: 100%;
+    min-height: 150px !important;
+    margin-bottom: 10px;
+}
+
+/* 共通パーツ設定エリア */
+.kmt-admin-common-settings-area {
+    padding: 15px;
+    background: #f0f6fb;
+    border: 1px solid #c3d4e4;
+    border-radius: 4px;
+}
+
+.kmt-admin-common-settings-area h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.kmt-admin-field-row {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* セクション管理エリア */
+.kmt-sections-area-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* アコーディオン・セクションカード */
+.kmt-section-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-left: 4px solid #2271b1;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.kmt-section-header {
+    padding: 12px 15px;
+    cursor: pointer;
+    background: #fff;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kmt-section-header:hover {
+    background: #f6f7f7;
+}
+
+.kmt-header-main {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.kmt-header-indicator {
+    margin-right: 10px;
+    color: #2271b1;
+    font-weight: bold;
+    width: 1.2em;
+    display: inline-block;
+}
+
+.kmt-is-closed .kmt-header-indicator::before { content: "▶"; }
+.kmt-is-open .kmt-header-indicator::before { content: "▼"; }
+
+.kmt-header-title {
+    font-weight: 600;
+}
+
+.kmt-header-meta {
+    font-weight: normal;
+    color: #666;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.kmt-header-action-hint {
+    font-size: 11px;
+    color: #999;
+    background: #eee;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.kmt-is-closed .kmt-header-action-hint::after { content: "開く"; }
+.kmt-is-open .kmt-header-action-hint::after { content: "閉じる"; }
+
+.kmt-section-body {
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+.kmt-is-closed .kmt-section-body {
+    display: none;
+}
+
+.kmt-section-card-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* テキストエリアの高さ指定 */
+.kmt-textarea-html { min-height: 220px; }
+.kmt-textarea-css  { min-height: 180px; }
+.kmt-textarea-js   { min-height: 160px; }
+.kmt-textarea-jsonld { min-height: 180px; }
+
+/* 削除ボタン */
+.kmt-section-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+
+.kmt-delete-section {
+    color: #d63638;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+.kmt-delete-section:hover {
+    color: #9b2021;
+    background: #fcf0f1;
+    border-radius: 3px;
+}
+
+/* WordPress 本文エリアの抑制 */
+body.kmt-enabled .editor-styles-wrapper,
+body.kmt-enabled .block-editor-writing-flow {
+    opacity: 0.35;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+body.kmt-enabled .editor-post-title {
+    opacity: 1 !important;
+}
+
+/* 本文エリアへの注意表示（簡易的） */
+body.kmt-enabled .block-editor-writing-flow::before {
+    content: "Kumitate 有効化中：通常本文は使用されません";
+    display: block;
+    background: #fff8e1;
+    color: #856404;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ffeeba;
+    margin-bottom: 10px;
+}
+
+/* 追加ボタンエリア */
+.kmt-admin-actions {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f6f7f7;
+    border: 1px dashed #ccd0d4;
+    text-align: center;
+}
+
+/* データエクスポート */
+.kmt-export-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f6f7f7;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.kmt-export-json {
+    background: #fff !important;
+}

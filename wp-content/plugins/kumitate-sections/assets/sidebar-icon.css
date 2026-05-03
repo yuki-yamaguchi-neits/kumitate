@@ -1,0 +1,35 @@
+/* Kumitate admin sidebar icon */
+
+#adminmenu #toplevel_page_kumitate-sections .wp-menu-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#adminmenu #toplevel_page_kumitate-sections .wp-menu-image::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    background-color: #a7aaad; /* 通常時 */
+    -webkit-mask-image: url("icon-sidebar.svg");
+    mask-image: url("icon-sidebar.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+/* hover */
+#adminmenu #toplevel_page_kumitate-sections:hover .wp-menu-image::before {
+    background-color: #72aee6;
+}
+
+/* current / selected */
+#adminmenu #toplevel_page_kumitate-sections.wp-has-current-submenu .wp-menu-image::before,
+#adminmenu #toplevel_page_kumitate-sections.current .wp-menu-image::before,
+#adminmenu #toplevel_page_kumitate-sections.wp-menu-open .wp-menu-image::before {
+    background-color: #ffffff;
+}
