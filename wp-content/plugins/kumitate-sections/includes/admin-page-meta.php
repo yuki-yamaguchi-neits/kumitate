@@ -51,10 +51,10 @@ function kmt_render_page_meta_box( $post ) {
         return (int) ( $a['order'] ?? 0 ) - (int) ( $b['order'] ?? 0 );
     } );
 
-    // エクスポート用JSONデータの生成
+    // AI編集用JSONデータの生成
     $export_data = array(
         'type'        => 'kumitate_page_export',
-        'version'     => '0.1.0',
+        'version'     => '0.1.1',
         'page_id'     => $post->ID,
         'page_title'  => get_the_title( $post->ID ),
         'exported_at' => current_time( 'c' ),
@@ -84,6 +84,12 @@ function kmt_render_page_meta_box( $post ) {
             </div>
         <?php endif; ?>
 
+        <!-- 丸ごと貼り替えの注意文 -->
+        <div class="kmt-admin-notice kmt-info-notice">
+            <span class="dashicons dashicons-info"></span>
+            <p>AIから受け取ったHTML / CSS / JSは、原則として該当セクションの欄を丸ごと上書きしてください。部分修正を行う場合は、検索して該当箇所を確認してから編集してください。</p>
+        </div>
+
         <p class="description">このページでは、通常本文の代わりにKumitateセクションを表示します。</p>
 
         <!-- 有効化 -->
@@ -96,7 +102,7 @@ function kmt_render_page_meta_box( $post ) {
 
         <hr>
 
-        <!-- 共通パーツ設定（アコーディオン化） -->
+        <!-- 共通パーツ設定 -->
         <div class="kmt-admin-common-settings-area kmt-accordion-item kmt-is-closed">
             <div class="kmt-accordion-toggle">
                 <span class="kmt-header-indicator"></span>
@@ -132,7 +138,7 @@ function kmt_render_page_meta_box( $post ) {
 
         <hr>
 
-        <!-- JSON-LD（アコーディオン化） -->
+        <!-- JSON-LD -->
         <div class="kmt-admin-field kmt-accordion-item kmt-is-closed">
             <div class="kmt-accordion-toggle">
                 <span class="kmt-header-indicator"></span>
@@ -152,7 +158,7 @@ function kmt_render_page_meta_box( $post ) {
                 <strong>一括HTML取り込み</strong>
             </div>
             <div class="kmt-bulk-import-body kmt-section-body" style="display: none;">
-                <p class="description">自己完結HTMLを貼り付けると、style/script/bodyを分解して1つのセクションとして追加します。</p>
+                <p class="description">自己完結HTMLを貼り付けると、style / script / body を分解して、1つのKumitateセクションとして追加します。AIがHTML / CSS / JSを分けて出力している場合は、この機能を使わず、各欄へ直接貼り付けてください。</p>
                 <textarea id="kmt-bulk-html-input" class="kmt-bulk-html-input" placeholder="<html>...</html>"></textarea>
                 <button type="button" id="kmt-import-html-as-section" class="button button-secondary">このHTMLをセクションとして取り込む</button>
             </div>
@@ -164,7 +170,6 @@ function kmt_render_page_meta_box( $post ) {
         <div class="kmt-sections-area">
             <div class="kmt-sections-area-header">
                 <h3>Kumitateセクション</h3>
-                <!-- 上部追加ボタンは削除 -->
             </div>
 
             <div id="kmt-sections-list">
@@ -184,14 +189,31 @@ function kmt_render_page_meta_box( $post ) {
 
         <hr>
 
-        <!-- データエクスポート -->
-        <div class="kmt-export-container">
-            <h4>Kumitateデータエクスポート</h4>
-            <p class="description">このページの現在の設定をJSON形式で書き出します。</p>
-            <button type="button" id="kmt-show-export-json" class="button button-secondary">エクスポートJSONを表示</button>
-            <div id="kmt-export-output" style="display: none; margin-top: 15px;">
-                <textarea class="kmt-export-json" readonly onclick="this.select()"><?php echo esc_textarea( $json_export ); ?></textarea>
-                <p class="description">内容をコピーして保存してください。</p>
+        <!-- データ管理（AI編集用JSON出力） -->
+        <div class="kmt-data-management-container">
+            <div class="kmt-export-area">
+                <h4>AI編集用JSON</h4>
+                <p class="description">
+                    このページのKumitateセクション構成を、AIに渡しやすいJSON形式で出力します。このJSONには、各セクションの名前、ID、HTML、CSS、JS、ページJSON-LDなどが含まれます。<br>
+                    ChatGPTや他のAIに貼り付けると、現在のページ構成を前提にして、続きの編集・修正・差し替え指示を作りやすくなります。<br>
+                    <strong>※これは自動復元用のデータではありません。</strong>復元が必要な場合は、AIにこのJSONを渡して、必要なセクションのHTML / CSS / JSを再生成してください。
+                </p>
+                
+                <div style="margin: 15px 0; padding: 12px; background: #fff; border-left: 4px solid #72aee6; font-size: 13px;">
+                    <strong>使い方：</strong><br>
+                    1. 「AI編集用JSONを表示」を押す<br>
+                    2. 「JSONをコピー」を押す<br>
+                    3. ChatGPTなどのAIに貼り付ける<br>
+                    4. 「このページの続きとして、セクション3を修正して」などと指示する
+                </div>
+
+                <button type="button" id="kmt-show-export-json" class="button button-secondary">AI編集用JSONを表示</button>
+                <button type="button" id="kmt-copy-export-json" class="button button-secondary" style="display: none;">JSONをコピー</button>
+                <span id="kmt-copy-success" style="display: none; color: #46b450; margin-left: 10px; font-size: 13px;">コピーしました</span>
+                
+                <div id="kmt-export-output" style="display: none; margin-top: 15px;">
+                    <textarea id="kmt-export-textarea" class="kmt-export-json" readonly onclick="this.select()"><?php echo esc_textarea( $json_export ); ?></textarea>
+                </div>
             </div>
         </div>
 
@@ -227,8 +249,10 @@ function kmt_render_section_card( $index, $data, $is_new = false ) {
     <div class="<?php echo esc_attr( $card_class ); ?>" data-index="<?php echo esc_attr( $index ); ?>">
         <div class="kmt-section-header kmt-accordion-toggle">
             <div class="kmt-header-main">
+                <span class="kmt-section-drag-handle" title="ドラッグして並び替え">☰</span>
                 <span class="kmt-header-indicator"></span>
                 <span class="kmt-header-title">
+                    <span class="kmt-section-number">セクション<?php echo esc_html( (int)$index + 1 ); ?></span>：
                     <span class="kmt-display-name"><?php echo esc_html( $display_name ); ?></span>
                     <span class="kmt-header-meta">
                         ID: <span class="kmt-display-id"><?php echo esc_html( $id ); ?></span> / 
@@ -240,6 +264,19 @@ function kmt_render_section_card( $index, $data, $is_new = false ) {
         </div>
 
         <div class="kmt-section-body">
+            <!-- セクション内検索 -->
+            <div class="kmt-section-search-bar">
+                <label>文字列確認</label>
+                <div class="kmt-search-input-wrap">
+                    <input type="text" class="kmt-section-search-input" placeholder="文字列やクラス名などが含まれているかを確認します">
+                    <span class="kmt-search-results-summary">
+                        HTML: <span class="kmt-count-html">0</span>件 / 
+                        CSS: <span class="kmt-count-css">0</span>件 / 
+                        JS: <span class="kmt-count-js">0</span>件
+                    </span>
+                </div>
+            </div>
+
             <div class="kmt-section-card-fields">
                 <div class="kmt-admin-field">
                     <label>セクション名</label>
@@ -261,15 +298,15 @@ function kmt_render_section_card( $index, $data, $is_new = false ) {
 
             <div class="kmt-admin-field">
                 <label>HTML</label>
-                <textarea name="<?php echo $prefix; ?>[html]" class="kmt-textarea-html"><?php echo esc_textarea( $html ); ?></textarea>
+                <textarea name="<?php echo $prefix; ?>[html]" class="kmt-textarea-html kmt-searchable"><?php echo esc_textarea( $html ); ?></textarea>
             </div>
             <div class="kmt-admin-field">
                 <label>CSS</label>
-                <textarea name="<?php echo $prefix; ?>[css]" class="kmt-textarea-css"><?php echo esc_textarea( $css ); ?></textarea>
+                <textarea name="<?php echo $prefix; ?>[css]" class="kmt-textarea-css kmt-searchable"><?php echo esc_textarea( $css ); ?></textarea>
             </div>
             <div class="kmt-admin-field">
                 <label>JS</label>
-                <textarea name="<?php echo $prefix; ?>[js]" class="kmt-textarea-js"><?php echo esc_textarea( $js ); ?></textarea>
+                <textarea name="<?php echo $prefix; ?>[js]" class="kmt-textarea-js kmt-searchable"><?php echo esc_textarea( $js ); ?></textarea>
             </div>
             
             <div class="kmt-section-footer">
@@ -296,7 +333,12 @@ function kmt_save_page_meta( $post_id ) {
         return;
     }
 
-    update_post_meta( $post_id, '_kmt_enabled', isset( $_POST['kmt_enabled'] ) ? '1' : '0' );
+    // 通常の保存処理（インポート機能は削除）
+    if ( isset( $_POST['kmt_enabled'] ) ) {
+        update_post_meta( $post_id, '_kmt_enabled', '1' );
+    } else {
+        update_post_meta( $post_id, '_kmt_enabled', '0' );
+    }
 
     update_post_meta( $post_id, '_kmt_use_header_part', isset( $_POST['kmt_use_header_part'] ) ? '1' : '0' );
     update_post_meta( $post_id, '_kmt_header_part', sanitize_text_field( $_POST['kmt_header_part'] ?? '' ) );

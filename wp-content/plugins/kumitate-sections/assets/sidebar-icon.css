@@ -1,12 +1,12 @@
 /* Kumitate admin sidebar icon */
 
-#adminmenu #toplevel_page_kumitate-sections .wp-menu-image {
+#adminmenu #toplevel_page_kumitate .wp-menu-image {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#adminmenu #toplevel_page_kumitate-sections .wp-menu-image::before {
+#adminmenu #toplevel_page_kumitate .wp-menu-image::before {
     content: "";
     width: 20px;
     height: 20px;
@@ -23,13 +23,13 @@
 }
 
 /* hover */
-#adminmenu #toplevel_page_kumitate-sections:hover .wp-menu-image::before {
+#adminmenu #toplevel_page_kumitate:hover .wp-menu-image::before {
     background-color: #72aee6;
 }
 
 /* current / selected */
-#adminmenu #toplevel_page_kumitate-sections.wp-has-current-submenu .wp-menu-image::before,
-#adminmenu #toplevel_page_kumitate-sections.current .wp-menu-image::before,
-#adminmenu #toplevel_page_kumitate-sections.wp-menu-open .wp-menu-image::before {
+#adminmenu #toplevel_page_kumitate.wp-has-current-submenu .wp-menu-image::before,
+#adminmenu #toplevel_page_kumitate.current .wp-menu-image::before,
+#adminmenu #toplevel_page_kumitate.wp-menu-open .wp-menu-image::before {
     background-color: #ffffff;
 }

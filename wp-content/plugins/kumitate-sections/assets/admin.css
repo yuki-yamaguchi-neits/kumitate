@@ -1,9 +1,35 @@
 /**
- * Kumitate Sections Admin CSS
+ * Kumitate Sections Admin CSS - v0.1.1
  */
 
 .kmt-admin-meta-wrap {
     padding: 10px 0;
+}
+
+/* 通知エリア */
+.kmt-admin-notice {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-left-width: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    margin: 15px 0;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+}
+
+.kmt-admin-notice p {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.kmt-info-notice {
+    border-left-color: #72aee6;
+}
+
+.kmt-info-notice .dashicons {
+    color: #72aee6;
 }
 
 .kmt-admin-field {
@@ -150,6 +176,40 @@
     flex: 1;
 }
 
+.kmt-section-drag-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    color: #999;
+    cursor: grab;
+    user-select: none;
+    font-size: 16px;
+}
+
+.kmt-section-drag-handle:active {
+    cursor: grabbing;
+}
+
+.kmt-section-drag-handle:hover {
+    color: #2271b1;
+}
+
+.kmt-section-sort-placeholder {
+    height: 50px;
+    background: #f0f6fb;
+    border: 2px dashed #c3d4e4;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.kmt-section-card.ui-sortable-helper {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-left-color: #72aee6;
+}
+
 .kmt-header-indicator {
     margin-right: 10px;
     color: #2271b1;
@@ -163,6 +223,15 @@
 
 .kmt-header-title {
     font-weight: 600;
+}
+
+.kmt-section-number {
+    background: #2271b1;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    margin-right: 5px;
 }
 
 .kmt-header-meta {
@@ -190,6 +259,43 @@
 
 .kmt-is-closed .kmt-section-body {
     display: none;
+}
+
+/* セクション内検索バー */
+.kmt-section-search-bar {
+    background: #f9f9f9;
+    padding: 12px 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.kmt-section-search-bar label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.kmt-search-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.kmt-section-search-input {
+    flex: 1;
+    font-size: 13px !important;
+}
+
+.kmt-search-results-summary {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+}
+
+.kmt-search-results-summary span {
+    font-weight: bold;
+    color: #2271b1;
 }
 
 .kmt-section-card-fields {
@@ -239,7 +345,7 @@ body.kmt-enabled .editor-post-title {
     opacity: 1 !important;
 }
 
-/* 本文エリアへの注意表示（簡易的） */
+/* 本文エリアへの注意表示 */
 body.kmt-enabled .block-editor-writing-flow::before {
     content: "Kumitate 有効化中：通常本文は使用されません";
     display: block;
@@ -261,8 +367,8 @@ body.kmt-enabled .block-editor-writing-flow::before {
     text-align: center;
 }
 
-/* データエクスポート */
-.kmt-export-container {
+/* AI編集用JSON出力 */
+.kmt-data-management-container {
     margin-top: 30px;
     padding: 20px;
     background: #f6f7f7;
@@ -272,4 +378,93 @@ body.kmt-enabled .block-editor-writing-flow::before {
 
 .kmt-export-json {
     background: #fff !important;
+}
+
+/* 使い方・プロンプトページ */
+.kmt-prompt-page-wrap {
+    max-width: 1000px;
+    margin-top: 20px;
+}
+
+.kmt-prompt-intro {
+    background: #fff;
+    border-left: 4px solid #72aee6;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.kmt-prompt-intro p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.kmt-prompt-steps-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+}
+
+.kmt-prompt-steps-card h3 {
+    margin-top: 0;
+}
+
+.kmt-prompt-steps-card ol {
+    margin-bottom: 0;
+}
+
+.kmt-prompt-steps-card li {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.kmt-prompt-textarea-wrap h3 {
+    margin-bottom: 15px;
+}
+
+.kmt-prompt-actions {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.kmt-prompt-textarea {
+    width: 100%;
+    min-height: 500px !important;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    background: #fff !important;
+    border: 1px solid #ccd0d4;
+    padding: 15px;
+}
+
+.kmt-github-link {
+    text-decoration: none;
+    font-size: 13px;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.kmt-github-link:hover {
+    color: #2271b1;
+}
+
+.kmt-github-link .dashicons {
+    margin-right: 5px;
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.kmt-prompt-footer {
+    margin-top: 40px;
+    color: #666;
+    font-size: 13px;
+    font-style: italic;
 }
